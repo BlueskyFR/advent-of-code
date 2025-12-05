@@ -1,0 +1,9 @@
+[package]
+name = "advent-of-code-2024"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+hashbrown = "0.15"
+itertools = "0.13"
+regex = "1.11"
