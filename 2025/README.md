@@ -35,3 +35,14 @@ fn main() {
     println!("Part 1: {part_1} / Part 2: {part_2}");
 }
 ```
+
+## Retrieve all inputs
+
+```bash
+mkdir -p inputs && cd inputs
+for i in $(seq 1 12); do
+  curl "https://adventofcode.com/2025/day/$i/input" \
+  -b 'session=<your session cookie value here>' \
+  -o day-$(printf "%02d" $i).txt
+done;
+```
