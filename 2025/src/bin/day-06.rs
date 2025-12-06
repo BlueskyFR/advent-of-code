@@ -45,11 +45,15 @@ fn solution() -> (isize, isize) {
     let mut col = 0;
     // len is in bytes
     for i in 0..lines[0].len() {
-        // The next column starts whenever a whitespace is found on all number lines at once
-        if lines
+        let parsed_number = lines
             .iter()
-            .all(|l| l.chars().nth(i).unwrap().is_whitespace())
-        {
+            .map(|l| l.as_bytes()[i] as char)
+            // Trim the string by keeping digits only
+            .filter(|c| c.is_ascii_digit())
+            .collect::<String>();
+
+        // The next column starts whenever a whitespace is found on all number lines at once
+        if parsed_number.is_empty() {
             // Create a new entry if we are at the start of a new number
             numbers.push(Vec::new());
             // Move to the next column
@@ -57,17 +61,8 @@ fn solution() -> (isize, isize) {
             continue;
         }
 
-        // Concat all bytes at position i into a single number
-        let parsed_number = lines
-            .iter()
-            .map(|l| l.chars().nth(i).unwrap())
-            .collect::<String>()
-            .trim()
-            .parse()
-            .unwrap();
-
         // Which we can then parse
-        numbers[col].push(parsed_number);
+        numbers[col].push(parsed_number.parse().unwrap());
     }
 
     let part_2 = apply_ops(&numbers, &ops);
