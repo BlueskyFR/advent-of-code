@@ -34,12 +34,10 @@ fn solution() -> (usize, usize) {
         let chars: Vec<char> = str.chars().collect();
 
         // Create groups of n chars
-        let split = chars
+        chars
             .chunks(n)
             .map(|chunk| chunk.iter().collect::<String>())
-            .collect::<Vec<_>>();
-
-        split
+            .collect::<Vec<_>>()
     }
 
     // Better: https://www.reddit.com/r/adventofcode/comments/1pcbzbd/2025_day_2_part_2_rust_is_too_elegant/
